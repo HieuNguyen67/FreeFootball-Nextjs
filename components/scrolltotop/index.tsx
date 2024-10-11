@@ -7,7 +7,7 @@ const ScrollToTop: React.FC = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [pathname]); // Use router.pathname to track path changes
+  }, [pathname]); 
 
   return null;
 };

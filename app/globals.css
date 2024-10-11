@@ -90,3 +90,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+.yellow{
+    color: #ffff00;
+}
+.pink{
+    color:#ff0082;
+}
+.bg-bluee{
+    background: #3131fe;
+}

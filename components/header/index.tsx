@@ -5,19 +5,17 @@ import { Button } from "../ui/button";
 import { IoMdMenu } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { IoMdFootball } from "react-icons/io";
-import { usePathname } from "next/navigation"; // Import usePathname
-import "../../styles/Header.scss";
+import { usePathname } from "next/navigation"; 
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const drawerRef = useRef<HTMLDivElement | null>(null);
-  const pathname = usePathname(); // Get the current pathname
+  const pathname = usePathname(); 
 
   const toggleDrawer = () => {
     setIsOpen((prev) => !prev);
   };
 
-  // Close the drawer when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -39,18 +37,16 @@ const Header: React.FC = () => {
     };
   }, [isOpen]);
 
-  // Close the menu after clicking a link
   const handleLinkClick = () => {
     setIsOpen(false);
   };
 
-  // Check if the current route matches the link's href
   const isActive = (href: string) => {
     return pathname === href;
   };
 
   return (
-    <nav className="bg-bluee sticky top-0">
+    <nav className="bg-bluee sticky top-0 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center">
@@ -112,7 +108,6 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`fixed inset-0 z-50 flex justify-end bg-black bg-opacity-50 transition-opacity duration-500 ${
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
