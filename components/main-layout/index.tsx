@@ -9,7 +9,12 @@ interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const pathname = usePathname();
-  const isHomePage = pathname === "/" || pathname === "/tintuc";
+  const isHomePage =
+    pathname === "/" ||
+    pathname === "/tintuc" ||
+    pathname === "/lichthidau" ||
+    pathname === "/bangxephang" ||
+    pathname === "/details";
 
   return (
     <>

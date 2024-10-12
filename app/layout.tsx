@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MainLayout from "@/components/main-layout";
+import BackToTop from "@/components/backtotop";
 
 
 
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <MainLayout>{children}</MainLayout>
+        <BackToTop />
       </body>
     </html>
   );

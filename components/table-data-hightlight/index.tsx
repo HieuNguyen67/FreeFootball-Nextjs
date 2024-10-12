@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/Home.scss";
 import {
   Table,
@@ -12,6 +12,8 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FaSort } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import Backdrop from "../backdrop";
 
 interface DataItem {
   title: string;
@@ -21,6 +23,7 @@ interface DataItem {
   side2: string;
   competition: string;
   videoTitles: string[];
+  videoEmbeds: string[];
 }
 
 interface ClientComponentProps {
@@ -29,13 +32,22 @@ interface ClientComponentProps {
 
 const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filter, setFilter] = useState(""); 
+  const [filter, setFilter] = useState("");
   const [sortColumn, setSortColumn] = useState("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [loading, setLoading] = useState<boolean>(true); // New loading state
 
-  const itemsPerPage = 7; 
+  const itemsPerPage = 7;
   const totalPages = Math.ceil(data.length / itemsPerPage);
-  const maxVisiblePages = 4; 
+  const maxVisiblePages = 4;
+
+  useEffect(() => {
+    if(data){
+      setLoading(false);
+    }
+
+
+  }, [data]);
 
   const filteredData = data.filter(
     (item) =>
@@ -78,26 +90,44 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
       setSortOrder("asc");
     }
   };
+  const router = useRouter();
+
+  const handleRowClick = (item: DataItem) => {
+    // Construct URL with query parameters
+    const queryParams = new URLSearchParams({
+      title: item.title,
+      side1: item.side1,
+      side2: item.side2,
+      date: item.date,
+      competition: item.competition,
+      videoTitles: item.videoTitles.map((video) => video).join(","),
+      videoEmbeds: item.videoEmbeds.map((video) => video).join(","),
+    }).toString();
+
+    // Navigate to new page with query params
+    router.push(`/details?${queryParams}`);
+  };
 
   return (
     <>
-      <div className="mb-4 mt-3 ">
+      <Backdrop isLoading={loading} />
+      <div className="mb-4 mt-10 ">
         <Input
           type="text"
           placeholder="Tìm kiếm trận đấu hoặc giải đấu..."
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded w-full"
+          className="px-4 py-2 border-2 border-yellow-300 rounded w-full blue"
         />
       </div>
 
-      <div className="mt-4 mb-10">
-        <Table className="bg-slate-50 rounded shadow">
-          <TableHeader>
+      <div className="mt-4 mb-10 border-yellow-300 border-2 ">
+        <Table className=" shadow bg-transparent  rounded">
+          <TableHeader className="bg-white  ">
             <TableRow>
               <TableHead
                 onClick={() => handleSort("title")}
-                className="cursor-pointer"
+                className="cursor-pointer blue"
               >
                 <div className="flex">
                   Trận đấu <FaSort className="mt-1 ms-1" />
@@ -105,11 +135,11 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
                     (sortOrder === "asc" ? "↑" : "↓")}{" "}
                 </div>
               </TableHead>
-              <TableHead>Hình ảnh</TableHead>
-              <TableHead>Video</TableHead>
+              <TableHead className="blue">Hình ảnh</TableHead>
+              <TableHead className="blue">Video</TableHead>
               <TableHead
                 onClick={() => handleSort("date")}
-                className="cursor-pointer"
+                className="cursor-pointer blue"
               >
                 <div className="flex">
                   Ngày <FaSort className="mt-1 ms-1" />
@@ -118,7 +148,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
               </TableHead>
               <TableHead
                 onClick={() => handleSort("side1")}
-                className="cursor-pointer"
+                className="cursor-pointer blue"
               >
                 <div className="flex">
                   Đội 1 <FaSort className="mt-1 ms-1" />
@@ -127,7 +157,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
               </TableHead>
               <TableHead
                 onClick={() => handleSort("side2")}
-                className="cursor-pointer"
+                className="cursor-pointer blue"
               >
                 <div className="flex">
                   Đội 2 <FaSort className="mt-1 ms-1" />
@@ -136,39 +166,46 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
               </TableHead>
               <TableHead
                 onClick={() => handleSort("competition")}
-                className="cursor-pointer "
+                className="cursor-pointer blue"
               >
                 <div className="flex">
                   Giải đấu <FaSort className="mt-1 ms-1" />
-                
-
-                {sortColumn === "competition" &&
-                  (sortOrder === "asc" ? "↑" : "↓")}</div>
+                  {sortColumn === "competition" &&
+                    (sortOrder === "asc" ? "↑" : "↓")}
+                </div>
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {paginatedData.map((item, index) => (
-              <TableRow key={index}>
-                <TableCell>{item.title}</TableCell>
-                <TableCell>
-                  <img
-                    src={item.thumbnail}
-                    alt="thumbnail"
-                    className="lg:h-20 lg:max-w-28 h-16 max-w-20"
-                  />
-                </TableCell>
-                <TableCell>
-                  {item.videoTitles.map((videoTitle, videoIndex) => (
-                    <div key={videoIndex}>{videoTitle}</div>
-                  ))}
-                </TableCell>
-                <TableCell>{item.date}</TableCell>
-                <TableCell>{item.side1}</TableCell>
-                <TableCell>{item.side2}</TableCell>
-                <TableCell>{item.competition}</TableCell>
-              </TableRow>
-            ))}
+            {
+              paginatedData.map((item, index) => (
+                <TableRow
+                  key={index}
+                  onClick={() => handleRowClick(item)}
+                  className="cursor-pointer"
+                >
+                  <TableCell className="text-white">{item.title}</TableCell>
+                  <TableCell>
+                    <img
+                      src={item.thumbnail}
+                      alt="thumbnail"
+                      className="lg:h-20 lg:max-w-28 h-16 max-w-20"
+                    />
+                  </TableCell>
+                  <TableCell className="text-white">
+                    {item.videoTitles.map((videoTitle, videoIndex) => (
+                      <div key={videoIndex}>{videoTitle}</div>
+                    ))}
+                  </TableCell>
+                  <TableCell className="text-white">{item.date}</TableCell>
+                  <TableCell className="text-white">{item.side1}</TableCell>
+                  <TableCell className="text-white">{item.side2}</TableCell>
+                  <TableCell className="text-white">
+                    {item.competition}
+                  </TableCell>
+                </TableRow>
+              ))
+            }
           </TableBody>
         </Table>
       </div>
@@ -192,7 +229,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
                 className={`px-4 py-2 ${
                   currentPage === pageNum
                     ? "pink bg-white"
-                    : "bg-bluee text-white"
+                    : "bg-transparent border border-white text-white"
                 } rounded`}
                 onClick={() => setCurrentPage(pageNum)}
               >

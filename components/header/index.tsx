@@ -46,7 +46,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <nav className="bg-bluee sticky top-0 z-10">
+    <nav className="bg-bluee sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center">
@@ -63,8 +63,8 @@ const Header: React.FC = () => {
                 <Link href="/" onClick={handleLinkClick}>
                   <p
                     className={` ${
-                      isActive("/") ? "bg-white pink" : "text-white"
-                    } px-3 py-2 rounded-md text-sm font-medium`}
+                      isActive("/") ? "bg-yelloww blue" : "text-white"
+                    } px-3 py-2 rounded-full text-sm font-medium`}
                   >
                     Highlights-Livestream
                   </p>
@@ -72,8 +72,8 @@ const Header: React.FC = () => {
                 <Link href="/lichthidau" onClick={handleLinkClick}>
                   <p
                     className={` ${
-                      isActive("/lichthidau") ? "bg-white pink" : "text-white"
-                    } px-3 py-2 rounded-md text-sm font-medium`}
+                      isActive("/lichthidau") ? "bg-yelloww blue" : "text-white"
+                    } px-3 py-2 rounded-full text-sm font-medium`}
                   >
                     Lịch Thi Đấu
                   </p>
@@ -81,8 +81,10 @@ const Header: React.FC = () => {
                 <Link href="/bangxephang" onClick={handleLinkClick}>
                   <p
                     className={` ${
-                      isActive("/bangxephang") ? "bg-white pink" : "text-white"
-                    } px-3 py-2 rounded-md text-sm font-medium`}
+                      isActive("/bangxephang")
+                        ? "bg-yelloww blue"
+                        : "text-white"
+                    } px-3 py-2 rounded-full text-sm font-medium`}
                   >
                     Bảng Xếp hạng
                   </p>
@@ -90,8 +92,8 @@ const Header: React.FC = () => {
                 <Link href="/tintuc" onClick={handleLinkClick}>
                   <p
                     className={`${
-                      isActive("/tintuc") ? "bg-white pink" : "text-white"
-                    } px-3 py-2 rounded-md text-sm font-medium`}
+                      isActive("/tintuc") ? "bg-yelloww blue" : "text-white"
+                    } px-3 py-2 rounded-full text-sm font-medium`}
                   >
                     Tin tức
                   </p>
@@ -135,8 +137,8 @@ const Header: React.FC = () => {
                 <Link href="/" onClick={handleLinkClick}>
                   <p
                     className={`text-white ${
-                      isActive("/") ? "bg-white pink" : "white"
-                    } block px-3 py-2 rounded-md text-sm`}
+                      isActive("/") ? "bg-yelloww blue" : "white"
+                    } block px-3 py-2 rounded-full text-sm`}
                   >
                     Highlights-Livestream
                   </p>
@@ -146,8 +148,8 @@ const Header: React.FC = () => {
                 <Link href="/lichthidau" onClick={handleLinkClick}>
                   <p
                     className={`text-white ${
-                      isActive("/lichthidau") ? "bg-white pink" : "white"
-                    } block px-3 py-2 rounded-md text-sm`}
+                      isActive("/lichthidau") ? "bg-yelloww blue" : "white"
+                    } block px-3 py-2 rounded-full text-sm`}
                   >
                     Lịch thi đấu
                   </p>
@@ -157,8 +159,8 @@ const Header: React.FC = () => {
                 <Link href="/bangxephang" onClick={handleLinkClick}>
                   <p
                     className={`text-white ${
-                      isActive("/bangxephang") ? "bg-white pink" : "white"
-                    } block px-3 py-2 rounded-md text-sm`}
+                      isActive("/bangxephang") ? "bg-yelloww blue" : "white"
+                    } block px-3 py-2 rounded-full text-sm`}
                   >
                     Bảng xếp hạng
                   </p>
@@ -168,7 +170,7 @@ const Header: React.FC = () => {
                 <Link href="/tintuc" onClick={handleLinkClick}>
                   <p
                     className={`text-white ${
-                      isActive("/tintuc") ? "bg-white pink" : "white"
+                      isActive("/tintuc") ? "bg-yelloww blue" : "white"
                     } block px-3 py-2 rounded-md text-sm`}
                   >
                     Tin tức
