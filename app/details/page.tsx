@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 
 const DetailsPage = () => {
   const searchParams = useSearchParams();
@@ -50,4 +50,12 @@ const DetailsPage = () => {
   );
 };
 
-export default DetailsPage;
+const DetailsPageWrapper = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DetailsPage />
+    </Suspense>
+  );
+};
+
+export default DetailsPageWrapper;

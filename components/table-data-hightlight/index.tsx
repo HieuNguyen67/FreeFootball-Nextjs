@@ -35,7 +35,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
   const [filter, setFilter] = useState("");
   const [sortColumn, setSortColumn] = useState("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [loading, setLoading] = useState<boolean>(true); // New loading state
+  const [loading, setLoading] = useState<boolean>(true);
 
   const itemsPerPage = 7;
   const totalPages = Math.ceil(data.length / itemsPerPage);
@@ -93,7 +93,6 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
   const router = useRouter();
 
   const handleRowClick = (item: DataItem) => {
-    // Construct URL with query parameters
     const queryParams = new URLSearchParams({
       title: item.title,
       side1: item.side1,
@@ -104,7 +103,6 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
       videoEmbeds: item.videoEmbeds.map((video) => video).join(","),
     }).toString();
 
-    // Navigate to new page with query params
     router.push(`/details?${queryParams}`);
   };
 
