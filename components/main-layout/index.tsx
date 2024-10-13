@@ -14,7 +14,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     pathname === "/tintuc" ||
     pathname === "/lichthidau" ||
     pathname === "/bangxephang" ||
-    pathname === "/details";
+    pathname === "/details" ||
+    pathname === "/tiso";
 
   return (
     <>

@@ -46,7 +46,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <nav className="bg-bluee sticky top-0 z-50">
+    <nav className="bg-bluee sticky top-0 z-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center">
@@ -67,6 +67,15 @@ const Header: React.FC = () => {
                     } px-3 py-2 rounded-full text-sm font-medium`}
                   >
                     Highlights-Livestream
+                  </p>
+                </Link>
+                <Link href="/tiso" onClick={handleLinkClick}>
+                  <p
+                    className={` ${
+                      isActive("/tiso") ? "bg-yelloww blue" : "text-white"
+                    } px-3 py-2 rounded-full text-sm font-medium`}
+                  >
+                    Tỉ số{" "}
                   </p>
                 </Link>
                 <Link href="/lichthidau" onClick={handleLinkClick}>
@@ -141,6 +150,17 @@ const Header: React.FC = () => {
                     } block px-3 py-2 rounded-full text-sm`}
                   >
                     Highlights-Livestream
+                  </p>
+                </Link>
+              </div>
+              <div className="w-full">
+                <Link href="/tiso" onClick={handleLinkClick}>
+                  <p
+                    className={`text-white ${
+                      isActive("/tiso") ? "bg-yelloww blue" : "white"
+                    } block px-3 py-2 rounded-full text-sm`}
+                  >
+                    Tỉ số
                   </p>
                 </Link>
               </div>

@@ -227,7 +227,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
                 className={`px-4 py-2 ${
                   currentPage === pageNum
                     ? "pink bg-white"
-                    : "bg-transparent border border-white text-white"
+                    : "bg-transparent border border-white text-white hover:bg-white hover:text-pink-500"
                 } rounded`}
                 onClick={() => setCurrentPage(pageNum)}
               >

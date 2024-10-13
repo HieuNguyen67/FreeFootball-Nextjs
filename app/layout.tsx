@@ -7,8 +7,8 @@ import BackToTop from "@/components/backtotop";
 
 
 export const metadata: Metadata = {
-  title: "Higlights, Livestream match football",
-  description: "Higlights, Livestream match football",
+  title: "Higlights, Livestream bóng đá",
+  description: "Xem Higlights, Livestream video bóng đá",
 };
 
 export default function RootLayout({

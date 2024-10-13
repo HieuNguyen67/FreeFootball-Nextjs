@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
+import "@/styles/Home.scss";
 
 const DetailsPage = () => {
   const searchParams = useSearchParams();
@@ -15,7 +16,7 @@ const DetailsPage = () => {
 
   return (
     <>
-      <div className="backgroundimg  w-12/12 h-56 bg-cover bg-top bg-no-repeat"></div>
+      <div className="backgroundimg  w-12/12 lg:h-56 h-36 bg-cover bg-top bg-no-repeat"></div>
       <div className="w-12/12 bg-yelloww ">
         <p className="text-center grid lg:text-4xl text-2xl justify-center items-center blue  h-24 py-2">
           <span className="text-2xl">Trận Đấu </span>
