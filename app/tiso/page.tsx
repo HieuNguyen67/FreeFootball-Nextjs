@@ -1,7 +1,12 @@
 import "@/styles/Home.scss";
 
 import ScheduleMatches from "@/components/shedule-matches";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Tỉ số bóng đá",
+  description: "Xem tỉ số bóng đá trực tuyến",
+};
 const MacthScore = () => {
   return (
     <>

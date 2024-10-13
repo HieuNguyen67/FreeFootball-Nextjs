@@ -23,7 +23,7 @@ const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortField, setSortField] = useState<string>("date");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [filter, setFilter] = useState<string>("");
 
   const pathname = usePathname();

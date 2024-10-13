@@ -1,6 +1,11 @@
 import ScheduleMatches from "@/components/shedule-matches";
 import "@/styles/Home.scss";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Lịch bóng đá",
+  description: "Xem lịch thi đấu bóng đá trực tuyến",
+};
 
 const CompetitionsPage = () => {
 
