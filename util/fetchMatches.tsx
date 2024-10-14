@@ -21,7 +21,7 @@ export const fetchMatches = async (compId: number): Promise<Match[]> => {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": process.env.API_KEY || "",
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_API_KEY || "",
       "x-rapidapi-host": "football-web-pages1.p.rapidapi.com",
     },
   };

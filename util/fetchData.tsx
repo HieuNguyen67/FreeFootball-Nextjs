@@ -24,7 +24,7 @@ export const fetchData = async (): Promise<DataItem[]> => {
   const options = {
     method: "GET",
     headers: {
-      "x-rapidapi-key": process.env.API_KEY || "",
+      "x-rapidapi-key": process.env.NEXT_PUBLIC_API_KEY || "",
       "x-rapidapi-host": "free-football-soccer-videos1.p.rapidapi.com",
     },
   };

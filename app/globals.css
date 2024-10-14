@@ -117,3 +117,12 @@ body {
 .animate-progress-bar {
   animation: progress 1.5s infinite linear;
 }
+.ql-align-right {
+	text-align: right;
+}
+.ql-align-center {
+	text-align: center;
+}
+.ql-align-left {
+	text-align: left;
+}

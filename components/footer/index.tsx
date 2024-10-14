@@ -5,7 +5,6 @@ const Footer:React.FC=()=>{
     return (
       <>
         <footer className=" bottom-0 z-40 w-full bg-transparent container mx-auto px-5 border-t-2 border-yellow-300 text-white mt-10">
-         
           <div className="text-center my-10">
             {" "}
             <span className="text-xl">ABOUT:</span>
@@ -13,6 +12,11 @@ const Footer:React.FC=()=>{
             <Link href="/">
               <span className="flex mt-2 justify-center hover:text-white yellow">
                 Highlights-Livestream
+              </span>{" "}
+            </Link>
+            <Link href="/tiso">
+              <span className="flex mt-2 justify-center hover:text-white yellow">
+                Tỉ số
               </span>{" "}
             </Link>
             <Link href="/lichthidau">

@@ -11,19 +11,18 @@ import Backdrop from "../backdrop";
 import { usePathname } from "next/navigation";
 import { fetchMatches, Match } from "@/util/fetchMatches";
 import { Input } from "../ui/input";
-import { FaSort } from "react-icons/fa";
 import { Button } from "../ui/button";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { MdOutlineReportGmailerrorred } from "react-icons/md";
 
 const ITEMS_PER_PAGE = 10;
-const PAGE_BUTTONS = 4; 
+const PAGE_BUTTONS = 4;
 
 const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortField, setSortField] = useState<string>("date");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [filter, setFilter] = useState<string>("");
 
   const pathname = usePathname();
@@ -51,11 +50,21 @@ const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
   }, [competitionId]);
 
   if (loading) return <Backdrop isLoading={loading} />;
-  if (error) return <p className="text-red-500">{error}</p>;
+  if (error) return (
+    <div className="lg:px-5">
+      <Alert>
+        <MdOutlineReportGmailerrorred className="h-4 w-4 text-red-500" />
+        <AlertTitle className="text-red-500">Xin lỗi!</AlertTitle>
+        <AlertDescription>
+          Chúng tôi chưa có dữ liệu cho giải này. Vui lòng chọn khác!
+        </AlertDescription>
+      </Alert>
+    </div>
+  );
 
-  const fullTimeMatches = matches
-    .filter((match) => match.status.full === "Full Time")
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+   const fullTimeMatches = matches
+     .filter((match) => match.status.full === "Full Time")
+     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   const scheduledMatches = matches.filter(
     (match) => match.status.full !== "Full Time"
@@ -71,37 +80,18 @@ const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
       match.date.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const sortedMatches = [...filteredMatches].sort((a, b) => {
-    const aValue = a[sortField as keyof Match];
-    const bValue = b[sortField as keyof Match];
-
-    if (typeof aValue === "string" && typeof bValue === "string") {
-      return sortOrder === "asc"
-        ? aValue.localeCompare(bValue)
-        : bValue.localeCompare(aValue);
-    }
-
-    return sortOrder === "asc"
-      ? aValue < bValue
-        ? -1
-        : 1
-      : aValue > bValue
-      ? -1
-      : 1;
-  });
-
-  const totalItems = sortedMatches.length;
+  const totalItems = filteredMatches.length;
   const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   const startItemIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endItemIndex = startItemIndex + ITEMS_PER_PAGE;
-  const paginatedMatches = sortedMatches.slice(startItemIndex, endItemIndex);
+  const paginatedMatches = filteredMatches.slice(startItemIndex, endItemIndex);
 
   const renderMatchRow = (match: Match, index: number) => (
     <TableRow key={index}>
       <TableCell>{match.date}</TableCell>
       <TableCell className="yellow">{match["home-team"].name}</TableCell>
       <TableCell>
-      {match["home-team"].score} - {match["away-team"].score}
+        {match["home-team"].score} - {match["away-team"].score}
       </TableCell>
       <TableCell className="yellow">{match["away-team"].name}</TableCell>
       <TableCell>{match.time}</TableCell>
@@ -127,32 +117,23 @@ const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
         onChange={(e) => setFilter(e.target.value)}
         className="mt-5 px-3 py-2 border rounded bg-white blue"
       />
-
-      <Table className="mt-5 border-2 border-yellow-300">
-        <TableHeader className=" bg-white blue">
-          <TableRow className="bg-white ">
-            <TableHead
-              className="blue  cursor-pointer "
-              onClick={() => {
-                setSortField("date");
-                setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-              }}
-            >
-              <div className="flex">
-                Ngày <FaSort className="mt-1 ms-1" />
-              </div>
-            </TableHead>
-            <TableHead className="blue">Đội nhà</TableHead>
-            <TableHead className="blue ">Tỉ số</TableHead>
-            <TableHead className="blue">Đội khách</TableHead>
-            <TableHead className="blue ">Thời gian</TableHead>
-            <TableHead className="blue">Sân</TableHead>
-            <TableHead className="blue">Trọng tài</TableHead>
-            <TableHead className="blue">Trạng thái</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>{paginatedMatches.map(renderMatchRow)}</TableBody>
-      </Table>
+      <div className="mt-5 mb-10 border-yellow-300 border-2 ">
+        <Table className=" border-2 border-yellow-300">
+          <TableHeader className=" bg-white blue">
+            <TableRow className="bg-white ">
+              <TableHead className="blue">Ngày</TableHead>
+              <TableHead className="blue">Đội nhà</TableHead>
+              <TableHead className="blue">Tỉ số</TableHead>
+              <TableHead className="blue">Đội khách</TableHead>
+              <TableHead className="blue">Thời gian</TableHead>
+              <TableHead className="blue">Sân</TableHead>
+              <TableHead className="blue">Trọng tài</TableHead>
+              <TableHead className="blue">Trạng thái</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>{paginatedMatches.map(renderMatchRow)}</TableBody>
+        </Table>
+      </div>
 
       <div className="mt-5 flex justify-center space-x-2">
         <Button
