@@ -102,6 +102,10 @@ const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
   );
 
   const handlePageChange = (newPage: number) => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     setCurrentPage(newPage);
   };
 

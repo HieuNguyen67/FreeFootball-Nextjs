@@ -58,7 +58,7 @@ const LeagueTable: FC<LeagueTableProps> = ({ competitionId }) => {
       const options = {
         method: "GET",
         headers: {
-          "x-rapidapi-key": process.env.NEXT_PUBLIC_API_KEY || "",
+          "x-rapidapi-key": process.env.NEXT_PUBLIC_API_KEY1 || "",
           "x-rapidapi-host": "football-web-pages1.p.rapidapi.com",
         },
       };
@@ -190,14 +190,7 @@ const LeagueTable: FC<LeagueTableProps> = ({ competitionId }) => {
                     <TableHead className="blue border border-black">
                       Pts
                     </TableHead>
-                    {/* <TableHead className="blue">Position</TableHead>
-                <TableHead className="blue">Team</TableHead>
-                <TableHead className="blue">Total Points</TableHead>
-                <TableHead className="blue">Played</TableHead>
-                <TableHead className="blue">Won</TableHead>
-                <TableHead className="blue">Drawn</TableHead>
-                <TableHead className="blue">Lost</TableHead>
-                <TableHead className="blue">Goal Difference</TableHead> */}
+                  
                   </TableRow>
                 </TableHeader>
                 <TableBody className="text-white">

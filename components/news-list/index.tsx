@@ -36,7 +36,6 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
     setCurrentPage(page);
   };
 
-  // Scroll to the top of the page when currentPage changes
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo({
