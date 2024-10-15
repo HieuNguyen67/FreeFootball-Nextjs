@@ -1,8 +1,6 @@
-
 "use client";
 import { IoTimeOutline } from "react-icons/io5";
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
@@ -19,49 +17,58 @@ type NewsListProps = {
 };
 
 export const NewsList: React.FC<NewsListProps> = ({ news }) => {
- const [currentPage, setCurrentPage] = useState(1);
- const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
- const sortedNews = [...news].sort(
-   (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
- );
+  const sortedNews = [...news].sort(
+    (a, b) =>
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
 
- const indexOfLastItem = currentPage * itemsPerPage;
- const indexOfFirstItem = indexOfLastItem - itemsPerPage;
- const currentNews = sortedNews.slice(indexOfFirstItem, indexOfLastItem);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentNews = sortedNews.slice(indexOfFirstItem, indexOfLastItem);
 
- const totalPages = Math.ceil(news.length / itemsPerPage);
- const maxVisibleButtons = 5;
+  const totalPages = Math.ceil(news.length / itemsPerPage);
+  const maxVisibleButtons = 5;
 
- const handlePageChange = (page: number) => {
-   setCurrentPage(page);
- };
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
- const paginationButtons = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-   const buttons = [];
-   const start = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
-   const end = Math.min(totalPages, start + maxVisibleButtons - 1);
+  // Scroll to the top of the page when currentPage changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [currentPage]);
 
-   for (let i = start; i <= end; i++) {
-     buttons.push(
-       <Button
-         key={i}
-         onClick={() => handlePageChange(i)}
-         className={`px-4 py-2 mx-1 rounded ${
-           i === currentPage ? "bg-white pink" : "bg-transparent text-white border border-white"
-         }`}
-       >
-         {i}
-       </Button>
-     );
-   }
+  const paginationButtons = () => {
+    const buttons = [];
+    const start = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
+    const end = Math.min(totalPages, start + maxVisibleButtons - 1);
 
-   return buttons;
- };
+    for (let i = start; i <= end; i++) {
+      buttons.push(
+        <Button
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`px-4 py-2 mx-1 rounded ${
+            i === currentPage
+              ? "bg-white pink"
+              : "bg-transparent text-white border border-white"
+          }`}
+        >
+          {i}
+        </Button>
+      );
+    }
+
+    return buttons;
+  };
 
   return (
     <div className="my-10">
@@ -71,7 +78,6 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
             className="bg-transparent border-2 border-yellow-300 shadow-lg rounded-lg p-6 transition hover:scale-105 duration-300 hover:backdrop-blur-sm backdrop-blur-lg"
             key={item.news_id}
           >
-            {" "}
             <Link href={`/tintuc/newsdetails/${item.news_id}`}>
               <img
                 src={item.image_blob}
@@ -82,19 +88,17 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
               <p className="text-slate-300 mb-4">
                 <span className="flex">
                   <IoTimeOutline className="text-xl me-2 mt-1" />
-
                   {new Date(item.created_at).toLocaleDateString()}
                 </span>
               </p>
               <p className="yellow text-sm">
                 {item.content.replace(/<[^>]*>?/gm, "").slice(0, 100)}...
-              </p>{" "}
+              </p>
             </Link>
           </div>
         ))}
       </div>
 
-      {/* Pagination */}
       <div className="flex justify-center mt-6">
         {paginationButtons()}
         {currentPage < totalPages && (
