@@ -46,75 +46,85 @@ const Header: React.FC = () => {
   };
 
   return (
-    <nav className="bg-bluee sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
-          <div className="flex items-center">
-            <Link href="/">
-              <p className="text-xl flex text-white">
-                FreeFootball{" "}
-                <span>
-                  <IoMdFootball className="mt-1 text-xl" />
-                </span>{" "}
-              </p>
-            </Link>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <Link href="/" onClick={handleLinkClick}>
-                  <p
-                    className={` ${
-                      isActive("/") ? "bg-yelloww blue" : "text-white"
-                    } px-3 py-2 rounded-full text-sm font-medium`}
-                  >
-                    Highlights-Livestream
-                  </p>
-                </Link>
-                <Link href="/tiso" onClick={handleLinkClick}>
-                  <p
-                    className={` ${
-                      isActive("/tiso") ? "bg-yelloww blue" : "text-white"
-                    } px-3 py-2 rounded-full text-sm font-medium`}
-                  >
-                    Tỉ số{" "}
-                  </p>
-                </Link>
-                <Link href="/lichthidau" onClick={handleLinkClick}>
-                  <p
-                    className={` ${
-                      isActive("/lichthidau") ? "bg-yelloww blue" : "text-white"
-                    } px-3 py-2 rounded-full text-sm font-medium`}
-                  >
-                    Lịch Thi Đấu
-                  </p>
-                </Link>
-                <Link href="/bangxephang" onClick={handleLinkClick}>
-                  <p
-                    className={` ${
-                      isActive("/bangxephang")
-                        ? "bg-yelloww blue"
-                        : "text-white"
-                    } px-3 py-2 rounded-full text-sm font-medium`}
-                  >
-                    Bảng Xếp hạng
-                  </p>
-                </Link>
-                <Link href="/tintuc" onClick={handleLinkClick}>
-                  <p
-                    className={`${
-                      isActive("/tintuc") ? "bg-yelloww blue" : "text-white"
-                    } px-3 py-2 rounded-full text-sm font-medium`}
-                  >
-                    Tin tức
-                  </p>
-                </Link>
+    <nav className=" sticky top-0 z-50">
+      <div className="bg-transparent backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center">
+              <Link href="/">
+                <p className="text-xl flex text-white">
+                  FreeFootball{" "}
+                  <span>
+                    <IoMdFootball className="mt-1 text-xl" />
+                  </span>{" "}
+                </p>
+              </Link>
+              <div className="hidden md:block">
+                <div className="ml-10 flex items-baseline space-x-4">
+                  <Link href="/" onClick={handleLinkClick}>
+                    <p
+                      className={` ${
+                        isActive("/")
+                          ? "bg-yelloww blue"
+                          : "text-white hover:bg-white hover:text-black transition hover:scale-105 duration-300"
+                      } px-3 py-2 rounded-full text-sm font-medium`}
+                    >
+                      Highlights-Livestream
+                    </p>
+                  </Link>
+                  <Link href="/tiso" onClick={handleLinkClick}>
+                    <p
+                      className={` ${
+                        isActive("/tiso")
+                          ? "bg-yelloww blue"
+                          : "text-white hover:bg-white hover:text-black transition hover:scale-105 duration-300"
+                      } px-3 py-2 rounded-full text-sm font-medium`}
+                    >
+                      Tỉ số{" "}
+                    </p>
+                  </Link>
+                  <Link href="/lichthidau" onClick={handleLinkClick}>
+                    <p
+                      className={` ${
+                        isActive("/lichthidau")
+                          ? "bg-yelloww blue"
+                          : "text-white hover:bg-white hover:text-black transition hover:scale-105 duration-300"
+                      } px-3 py-2 rounded-full text-sm font-medium`}
+                    >
+                      Lịch Thi Đấu
+                    </p>
+                  </Link>
+                  <Link href="/bangxephang" onClick={handleLinkClick}>
+                    <p
+                      className={` ${
+                        isActive("/bangxephang")
+                          ? "bg-yelloww blue"
+                          : "text-white hover:bg-white hover:text-black transition hover:scale-105 duration-300"
+                      } px-3 py-2 rounded-full text-sm font-medium`}
+                    >
+                      Bảng Xếp hạng
+                    </p>
+                  </Link>
+                  <Link href="/tintuc" onClick={handleLinkClick}>
+                    <p
+                      className={`${
+                        isActive("/tintuc")
+                          ? "bg-yelloww blue"
+                          : "text-white hover:bg-white hover:text-black transition hover:scale-105 duration-300"
+                      } px-3 py-2 rounded-full text-sm font-medium`}
+                    >
+                      Tin tức
+                    </p>
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="-mr-2 flex md:hidden">
-            <Button onClick={toggleDrawer} style={{ background: "#3132fe" }}>
-              <span className="sr-only">Open main menu</span>
-              <IoMdMenu className="text-lg" />
-            </Button>
+            <div className="-mr-2 flex md:hidden">
+              <Button onClick={toggleDrawer} style={{ background: "#3132fe" }}>
+                <span className="sr-only">Open main menu</span>
+                <IoMdMenu className="text-lg" />
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -126,10 +136,9 @@ const Header: React.FC = () => {
       >
         <div
           ref={drawerRef}
-          className={`w-64 shadow-lg transform transition-transform duration-300 ease-in-out ${
+          className={`w-64 shadow-lg transform transition-transform duration-300 ease-in-out bg-transparent backdrop-blur-md ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
-          style={{ background: "#3132fe" }}
         >
           <div className="px-2 pt-2 pb-3 space-y-1">
             <div className="flex flex-col">
@@ -179,7 +188,7 @@ const Header: React.FC = () => {
                 <Link href="/bangxephang" onClick={handleLinkClick}>
                   <p
                     className={`text-white ${
-                      isActive("/bangxephang") ? "bg-yelloww blue" : "white"
+                      isActive("/bangxephang") ? "bg-yelloww blue" : "white "
                     } block px-3 py-2 rounded-full text-sm`}
                   >
                     Bảng xếp hạng

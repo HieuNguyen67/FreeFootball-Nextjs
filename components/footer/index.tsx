@@ -4,7 +4,7 @@ import Link from "next/link";
 const Footer:React.FC=()=>{
     return (
       <>
-        <footer className=" bottom-0 z-40 w-full bg-transparent container mx-auto px-5 border-t-2 border-yellow-300 text-white mt-10">
+        <footer className=" bottom-0 z-40 w-full bg-transparent container mx-auto px-5 border-t-2 border-yellow-300 text-white mt-10 backdrop-blur-lg">
           <div className="text-center my-10">
             {" "}
             <span className="text-xl">ABOUT:</span>

@@ -8,7 +8,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"; 
+} from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { FaSort } from "react-icons/fa";
@@ -42,11 +42,9 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
   const maxVisiblePages = 4;
 
   useEffect(() => {
-    if(data){
+    if (data) {
       setLoading(false);
     }
-
-
   }, [data]);
 
   const filteredData = data.filter(
@@ -90,6 +88,15 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
       setSortOrder("asc");
     }
   };
+
+  const handlePageChange = (pageNum: number) => {
+     window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+    setCurrentPage(pageNum);
+  };
+
   const router = useRouter();
 
   const handleRowClick = (item: DataItem) => {
@@ -119,9 +126,9 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
         />
       </div>
 
-      <div className="mt-4 mb-10 border-yellow-300 border-2 ">
-        <Table className=" shadow bg-transparent  rounded">
-          <TableHeader className="bg-white  ">
+      <div className="mt-4 mb-10 border-yellow-300 border-2 backdrop-blur-lg ">
+        <Table className="shadow bg-transparent rounded">
+          <TableHeader className="bg-white">
             <TableRow>
               <TableHead
                 onClick={() => handleSort("title")}
@@ -129,8 +136,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
               >
                 <div className="flex">
                   Trận đấu <FaSort className="mt-1 ms-1" />
-                  {sortColumn === "title" &&
-                    (sortOrder === "asc" ? "↑" : "↓")}{" "}
+                  {sortColumn === "title" && (sortOrder === "asc" ? "↑" : "↓")}
                 </div>
               </TableHead>
               <TableHead className="blue">Hình ảnh</TableHead>
@@ -174,36 +180,32 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
               </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
-            {
-              paginatedData.map((item, index) => (
-                <TableRow
-                  key={index}
-                  onClick={() => handleRowClick(item)}
-                  className="cursor-pointer"
-                >
-                  <TableCell className="text-white">{item.title}</TableCell>
-                  <TableCell>
-                    <img
-                      src={item.thumbnail}
-                      alt="thumbnail"
-                      className="lg:h-20 lg:max-w-28 h-16 max-w-20"
-                    />
-                  </TableCell>
-                  <TableCell className="text-white">
-                    {item.videoTitles.map((videoTitle, videoIndex) => (
-                      <div key={videoIndex}>{videoTitle}</div>
-                    ))}
-                  </TableCell>
-                  <TableCell className="text-white">{item.date}</TableCell>
-                  <TableCell className="text-white">{item.side1}</TableCell>
-                  <TableCell className="text-white">{item.side2}</TableCell>
-                  <TableCell className="text-white">
-                    {item.competition}
-                  </TableCell>
-                </TableRow>
-              ))
-            }
+          <TableBody >
+            {paginatedData.map((item, index) => (
+              <TableRow
+                key={index}
+                onClick={() => handleRowClick(item)}
+                className="cursor-pointer transition duration-300 hover:scale-95 "
+              >
+                <TableCell className="text-white">{item.title}</TableCell>
+                <TableCell>
+                  <img
+                    src={item.thumbnail}
+                    alt="thumbnail"
+                    className="lg:h-20 lg:max-w-28 h-16 max-w-20"
+                  />
+                </TableCell>
+                <TableCell className="text-white">
+                  {item.videoTitles.map((videoTitle, videoIndex) => (
+                    <div key={videoIndex}>{videoTitle}</div>
+                  ))}
+                </TableCell>
+                <TableCell className="text-white">{item.date}</TableCell>
+                <TableCell className="text-white">{item.side1}</TableCell>
+                <TableCell className="text-white">{item.side2}</TableCell>
+                <TableCell className="text-white">{item.competition}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
@@ -211,7 +213,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
       <div className="flex justify-center space-x-2 mt-4 mb-20">
         <Button
           className={` ${currentPage === 1 && "opacity-50 cursor-not-allowed"}`}
-          onClick={() => setCurrentPage(currentPage - 1)}
+          onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
           Previous
@@ -229,7 +231,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
                     ? "pink bg-white"
                     : "bg-transparent border border-white text-white hover:bg-white hover:text-pink-500"
                 } rounded`}
-                onClick={() => setCurrentPage(pageNum)}
+                onClick={() => handlePageChange(pageNum)}
               >
                 {pageNum}
               </Button>
@@ -241,7 +243,7 @@ const TableDataHighlight: React.FC<ClientComponentProps> = ({ data }) => {
           className={` ${
             currentPage === totalPages && "opacity-50 cursor-not-allowed"
           }`}
-          onClick={() => setCurrentPage(currentPage + 1)}
+          onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
           Next

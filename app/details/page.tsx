@@ -23,7 +23,7 @@ const DetailsPage = () => {
           {side1} - {side2}
         </p>
       </div>
-      <div className="w-12/12 bg-transparent border border-white container mx-auto py-4 ">
+      <div className="w-12/12 bg-transparent backdrop-blur-lg border border-white container mx-auto py-4 ">
         <p className="text-center grid lg:text-xl justify-center items-center yellow  h-20">
           {date}
           <br />
@@ -34,7 +34,7 @@ const DetailsPage = () => {
         {videoTitles.map((videoTitle, index) => (
           <div key={index}>
             <div className="flex justify-center">
-              <p className=" my-5 lg:text-4xl text-xl py-3 w-5/12 text-center border-2 flex justify-center border-white items-center">
+              <p className=" my-5 lg:text-4xl backdrop-blur-lg text-xl py-3 w-5/12 text-center border-2 flex justify-center border-white items-center">
                 {videoTitle}
               </p>
             </div>

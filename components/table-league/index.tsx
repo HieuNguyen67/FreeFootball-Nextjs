@@ -107,7 +107,7 @@ const LeagueTable: FC<LeagueTableProps> = ({ competitionId }) => {
           <div className="lg:px-5">
             <NoteDialog />
             <div className=" mt-4 mb-10 border-yellow-300 border-2 ">
-              <Table className="shadow bg-transparent  rounded">
+              <Table className="shadow bg-transparent  rounded backdrop-blur-lg">
                 <TableHeader className="bg-white  ">
                   <TableRow>
                     <TableHead

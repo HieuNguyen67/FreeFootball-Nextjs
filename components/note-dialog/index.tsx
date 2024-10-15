@@ -13,13 +13,13 @@ export function NoteDialog() {
         <DialogTrigger asChild>
           <Button className="bg-yelloww blue">Chú thích</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[500px] bg-yelloww blue ">
+        <DialogContent className="sm:max-w-[500px] bg-transparent backdrop-blur-lg text-white ">
           <DialogHeader>
-            <div className="text-black">CHÚ THÍCH</div>
+            <div className="  ">CHÚ THÍCH</div>
           </DialogHeader>
           <div className="flex ">
             <div className="w-1/2">
-              <p className="lg:text-xl leading-10">
+              <p className="lg:text-xl leading-10 ">
                 P: Số trận đã chơi <br />
                 W: Số trận thắng <br />
                 D: Số trận hòa <br />

@@ -117,7 +117,7 @@ const MatchesTable: FC<{ competitionId: number }> = ({ competitionId }) => {
         onChange={(e) => setFilter(e.target.value)}
         className="mt-5 px-3 py-2 border rounded bg-white blue"
       />
-      <div className="mt-5 mb-10 border-yellow-300 border-2 ">
+      <div className="mt-5 mb-10 border-yellow-300 border-2 backdrop-blur-lg ">
         <Table className=" border-2 border-yellow-300">
           <TableHeader className=" bg-white blue">
             <TableRow className="bg-white ">

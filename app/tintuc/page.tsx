@@ -1,7 +1,12 @@
 import "@/styles/Home.scss";
 
 import { NewsList } from "@/components/news-list";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Tin tức bóng đá",
+  description: "Xem tin tức bóng đá trực tuyến",
+};
 async function getNews() {
   const res = await fetch('https://backend-football.vercel.app/v1/api/admin/news-with-images', {
     next: { revalidate: 60 },

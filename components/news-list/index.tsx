@@ -38,6 +38,10 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
  };
 
  const paginationButtons = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
    const buttons = [];
    const start = Math.max(1, currentPage - Math.floor(maxVisibleButtons / 2));
    const end = Math.min(totalPages, start + maxVisibleButtons - 1);
@@ -63,14 +67,16 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
     <div className="my-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {currentNews.map((item) => (
-          <Link href={`/tintuc/newsdetails/${item.news_id}`} key={item.news_id}>
-            <div
-              className="bg-transparent border-2 border-yellow-300 shadow-lg rounded-lg p-6"
-            >
+          <div
+            className="bg-transparent border-2 border-yellow-300 shadow-lg rounded-lg p-6 transition hover:scale-105 duration-300 hover:backdrop-blur-sm backdrop-blur-lg"
+            key={item.news_id}
+          >
+            {" "}
+            <Link href={`/tintuc/newsdetails/${item.news_id}`}>
               <img
                 src={item.image_blob}
                 alt={item.title}
-                className="w-full h-48 object-cover rounded-lg mb-4"
+                className="w-full h-48 object-cover rounded-lg mb-4 "
               />
               <p className="text-xl  mb-2 text-white">{item.title}</p>
               <p className="text-slate-300 mb-4">
@@ -82,9 +88,9 @@ export const NewsList: React.FC<NewsListProps> = ({ news }) => {
               </p>
               <p className="yellow text-sm">
                 {item.content.replace(/<[^>]*>?/gm, "").slice(0, 100)}...
-              </p>
-            </div>
-           </Link>
+              </p>{" "}
+            </Link>
+          </div>
         ))}
       </div>
 

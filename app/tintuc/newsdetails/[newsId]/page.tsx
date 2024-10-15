@@ -3,6 +3,9 @@
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import "@/styles/Newsdetail.scss";
+import Link from "next/link";
+import { IoArrowBackSharp } from "react-icons/io5";
+import Backdrop from "@/components/backdrop";
 type NewsDetailProps = {
   news_id: number;
   title: string;
@@ -41,7 +44,7 @@ const NewsDetail: React.FC = () => {
   }, [newsId]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Backdrop isLoading={loading} />;
   }
 
   if (!newsDetail) {
@@ -50,9 +53,14 @@ const NewsDetail: React.FC = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <div className="bg-white shadow-lg rounded-lg lg:p-8 p-5 lg:px-20">
-        <h1 className="text-3xl font-bold mb-4">{newsDetail.title}</h1>
-        <p className="text-gray-500 mb-4">
+      <div>
+        <Link href="/tintuc">
+          <IoArrowBackSharp className="yellow text-3xl my-5" />
+        </Link>
+      </div>
+      <div className="bg-transparent backdrop-blur-lg shadow-lg rounded-lg lg:p-8 p-5 lg:px-20 text-white border-2 ">
+        <h1 className="text-3xl  mb-4">{newsDetail.title}</h1>
+        <p className=" mb-4">
           {new Date(newsDetail.created_at).toLocaleDateString()} by{" "}
           {newsDetail.user_name} | Category: {newsDetail.category_name}
         </p>

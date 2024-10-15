@@ -15,15 +15,10 @@ const CompetitionsSelect: FC<CompetitionsSelectProps> = ({
     <div className="container mx-auto lg:px-5 lg:my-10 my-5">
       <label className="text-xl text-white">Giải đấu:</label>
       <select
-        onChange={(e) => onCompetitionChange(Number(e.target.value))} 
-        className="w-full p-2 border-2 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 bg-transparent mt-3"
+        onChange={(e) => onCompetitionChange(Number(e.target.value))}
+        className="w-full p-2 border-2 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 bg-transparent backdrop-blur-lg mt-3"
       >
-        <option
-         
-          className="blue bg-yellow text-xs"
-        >
-          Chọn giải đấu
-        </option>
+        <option className="blue bg-yellow text-xs">Chọn giải đấu</option>
         {competitions.map((competition) => (
           <option
             key={competition.id}
